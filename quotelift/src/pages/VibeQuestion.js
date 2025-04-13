@@ -13,6 +13,7 @@ const VIBE_OPTIONS = [
 const VibeQuestion = () => {
   const [selectedVibe, setSelectedVibe] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0); // Track the current quote index
+  const [typedQuote, setTypedQuote] = useState(""); // State for typing effect
 
   const handleNext = React.useCallback(() => {
     if (selectedVibe) {
@@ -86,16 +87,32 @@ const VibeQuestion = () => {
     };
   }, [handleNext, handleBack]);
 
+  useEffect(() => {
+    if (selectedVibe) {
+      const fullQuote = QUOTES[selectedVibe][currentIndex]?.split(" — ")[0] || ""; // Ensure fullQuote is valid
+      let index = 0;
+      setTypedQuote(""); // Reset the typed quote
+
+      const typingInterval = setInterval(() => {
+        if (index <= fullQuote.length) { // Include the first letter
+          setTypedQuote(fullQuote.slice(0, index)); // Use slice to avoid undefined
+          index++;
+        } else {
+          clearInterval(typingInterval);
+        }
+      }, 50); // Adjust typing speed here
+
+      return () => clearInterval(typingInterval);
+    }
+  }, [selectedVibe, currentIndex]);
+
   const handleVibeSelect = (vibe) => {
     setSelectedVibe(vibe);
     setCurrentIndex(0); // Reset to the first quote when a new vibe is selected
   };
 
-  const currentQuote = selectedVibe
-    ? QUOTES[selectedVibe][currentIndex].split(" — ")[0]
-    : "";
   const currentAuthor = selectedVibe
-    ? QUOTES[selectedVibe][currentIndex].split(" — ")[1] || "Unknown"
+    ? QUOTES[selectedVibe][currentIndex]?.split(" — ")[1] || "Unknown" // Ensure valid author
     : "";
 
   return (
@@ -137,7 +154,7 @@ const VibeQuestion = () => {
           }}>
             <div className="quote-box">
               <h3>Your Quote:</h3>
-              <p>{currentQuote}</p>
+              <p>{typedQuote}</p> {/* Use the typed quote */}
               <p className="quote-author">— {currentAuthor}</p>
             </div>
           </div>
