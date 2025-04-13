@@ -45,7 +45,7 @@ const VibeQuestion = () => {
       flashcard.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         const deltaX = e.clientX - startX;
-        flashcard.style.transform = `translateX(${deltaX}px)`;
+        flashcard.style.transform = `translateX(${deltaX}px)`; // Move flashcard
       });
 
       flashcard.addEventListener('mouseup', (e) => {
@@ -55,12 +55,12 @@ const VibeQuestion = () => {
 
         if (deltaX > 100) {
           // Move to the next flashcard
-          flashcard.classList.add('hidden');
-          setTimeout(() => flashcard.style.transform = '', 500);
+          flashcard.style.transform = '';
+          handleNext();
         } else if (deltaX < -100) {
           // Move to the previous flashcard
-          flashcard.classList.add('hidden');
-          setTimeout(() => flashcard.style.transform = '', 500);
+          flashcard.style.transform = '';
+          handleBack();
         } else {
           // Reset position
           flashcard.style.transform = '';
@@ -71,53 +71,17 @@ const VibeQuestion = () => {
         if (isDragging) {
           isDragging = false;
           flashcard.classList.remove('dragging');
-          flashcard.style.transform = '';
-        }
-      });
-    });
-
-    let currentIndex = 0;
-
-    function showNextFlashcard() {
-      if (currentIndex < flashcards.length - 1) {
-        const currentFlashcard = flashcards[currentIndex];
-        const nextFlashcard = flashcards[currentIndex + 1];
-
-        currentFlashcard.classList.add('hidden');
-        nextFlashcard.classList.remove('hidden');
-
-        currentIndex++;
-      }
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') {
-        showNextFlashcard();
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    const flashcards = document.querySelectorAll('.flashcard');
-
-    flashcards.forEach((flashcard) => {
-      flashcard.addEventListener('click', (e) => {
-        const rect = flashcard.getBoundingClientRect();
-        const clickX = e.clientX;
-
-        if (clickX < rect.left + rect.width / 2) {
-          // Clicked on the left side, go to the previous flashcard
-          handleBack();
-        } else {
-          // Clicked on the right side, go to the next flashcard
-          handleNext();
+          flashcard.style.transform = ''; // Reset position
         }
       });
     });
 
     return () => {
       flashcards.forEach((flashcard) => {
-        flashcard.removeEventListener('click', () => {});
+        flashcard.removeEventListener('mousedown', () => {});
+        flashcard.removeEventListener('mousemove', () => {});
+        flashcard.removeEventListener('mouseup', () => {});
+        flashcard.removeEventListener('mouseleave', () => {});
       });
     };
   }, [handleNext, handleBack]);
@@ -150,11 +114,32 @@ const VibeQuestion = () => {
       </div>
 
       {selectedVibe && (
-        <div className="flashcard">
-          <div className="quote-box">
-            <h3>Your Quote:</h3>
-            <p>{currentQuote}</p>
-            <p className="quote-author">— {currentAuthor}</p>
+        <div className="flashcard-container">
+          <div className="flashcard" style={{
+            border: "2px solid #ccc",
+            borderRadius: "10px",
+            padding: "20px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            maxWidth: "400px",
+            margin: "20px auto",
+            textAlign: "center",
+            backgroundColor: "#fff",
+            transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            cursor: "pointer"
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.05)";
+            e.currentTarget.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.2)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+            e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+          }}>
+            <div className="quote-box">
+              <h3>Your Quote:</h3>
+              <p>{currentQuote}</p>
+              <p className="quote-author">— {currentAuthor}</p>
+            </div>
           </div>
           <div className="flashcard-controls">
             <button onClick={handleBack} className="flashcard-button">
