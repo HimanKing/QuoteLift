@@ -117,3 +117,93 @@
   .slide-up {
     animation: slideUp 1.2s ease-out; /* Increased duration to 1.2s */
   }
+
+  @keyframes slideRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .slide-right {
+    animation: slideRight 0.8s ease-out; /* Animation for the next flashcard */
+  }
+
+  @keyframes slideOutLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .slide-out-left {
+    animation: slideOutLeft 1.2s ease-out; /* Slower sliding out to the left */
+  }
+
+  .slide-in-right {
+    animation: slideInRight 1.2s ease-out; /* Slower sliding in from the right */
+  }
+
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .slide-out-right {
+    animation: slideOutRight 1.2s ease-out; /* Slower sliding out to the right */
+  }
+
+  .slide-in-left {
+    animation: slideInLeft 1.2s ease-out; /* Slower sliding in from the left */
+  }
+
+  @keyframes slideUpFromBottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .slide-up-from-bottom {
+    animation: slideUpFromBottom 1.2s ease-out; /* Smooth slide-up animation */
+  }

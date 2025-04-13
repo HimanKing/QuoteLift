@@ -14,20 +14,32 @@ const VibeQuestion = () => {
   const [selectedVibe, setSelectedVibe] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0); // Track the current quote index
   const [typedQuote, setTypedQuote] = useState(""); // State for typing effect
+  const [animationClass, setAnimationClass] = useState(""); // State for animation class
 
   const handleNext = React.useCallback(() => {
     if (selectedVibe) {
-      const quotesForVibe = QUOTES[selectedVibe];
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % quotesForVibe.length); // Loop to the first quote
+      setAnimationClass("slide-out-left"); // Trigger slide-out animation
+      setTimeout(() => {
+        const quotesForVibe = QUOTES[selectedVibe];
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % quotesForVibe.length); // Update to the next quote
+        setAnimationClass("slide-in-right"); // Trigger slide-in animation
+      }, 500); // Match the animation duration
     }
   }, [selectedVibe]);
 
   const handleBack = React.useCallback(() => {
     if (selectedVibe) {
-      const quotesForVibe = QUOTES[selectedVibe];
-      setCurrentIndex((prevIndex) =>
-        (prevIndex - 1 + quotesForVibe.length) % quotesForVibe.length
-      ); // Loop to the last quote
+      setAnimationClass("slide-out-right"); // Trigger slide-out animation
+      setTimeout(() => {
+        const quotesForVibe = QUOTES[selectedVibe];
+        setCurrentIndex((prevIndex) =>
+          (prevIndex - 1 + quotesForVibe.length) % quotesForVibe.length
+        ); // Update to the previous quote
+        setAnimationClass("slide-in-left"); // Trigger slide-in animation
+      }, 800); // Match the animation duration
+      setTimeout(() => {
+        setAnimationClass(""); // Reset animation class after animation completes
+      }, 1600); // Ensure reset happens after both animations
     }
   }, [selectedVibe]);
 
@@ -53,7 +65,6 @@ const VibeQuestion = () => {
         isDragging = false;
         flashcard.classList.remove('dragging');
         const deltaX = e.clientX - startX;
-
         if (deltaX > 100) {
           // Move to the next flashcard
           flashcard.style.transform = '';
@@ -108,12 +119,16 @@ const VibeQuestion = () => {
 
   const handleVibeSelect = (vibe) => {
     setSelectedVibe(vibe);
+    setAnimationClass("slide-up-from-bottom"); // Trigger slide-up animation
     const quotesForVibe = QUOTES[vibe];
     const randomIndex = Math.floor(Math.random() * quotesForVibe.length); // Generate a random index
     setCurrentIndex(randomIndex); // Set to a random quote
+    setTimeout(() => {
+      setAnimationClass(""); // Reset animation class after animation completes
+    }, 1200); // Match the animation duration
   };
 
-  const currentAuthor = selectedVibe
+  const currentAuthor = selectedVibe 
     ? QUOTES[selectedVibe][currentIndex]?.split(" — ")[1] || "Unknown" // Ensure valid author
     : "";
 
@@ -143,7 +158,7 @@ const VibeQuestion = () => {
       </div>
 
       {selectedVibe && (
-        <div className="flashcard-container slide-up" style={{
+        <div className={`flashcard-container ${animationClass}`} style={{
           display: "flex",
           justifyContent: "center", // Center the flashcard horizontally
           alignItems: "center", // Center the flashcard vertically
