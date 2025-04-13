@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Energy Level Slider</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .slider-container {
+      text-align: center;
+    }
+
+    input[type="range"] {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-container">
+    <h1>Adjust Energy Level</h1>
+    <input type="range" id="energySlider" min="0" max="100" value="50">
+    <p>Energy Level: <span id="energyValue">50</span></p>
+  </div>
+
+  <script>
+    const slider = document.getElementById('energySlider');
+    const energyValue = document.getElementById('energyValue');
+    const body = document.body;
+
+    slider.addEventListener('input', () => {
+      const value = slider.value;
+      energyValue.textContent = value;
+
+      // Calculate color based on energy level
+      const red = Math.min(255, Math.floor((value / 100) * 255));
+      const blue = 255 - red;
+      body.style.backgroundColor = `rgb(${red}, 0, ${blue})`;
+    });
+  </script>
+</body>
+</html>

@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(135deg, #ff9a8b, #ff6a88, #ff99ac); /* Gradient background */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
   padding: 2rem;
   box-sizing: border-box;
   text-align: center;
