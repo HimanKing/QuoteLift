@@ -143,7 +143,7 @@ const VibeQuestion = () => {
       </div>
 
       {selectedVibe && (
-        <div className="flashcard-container" style={{
+        <div className="flashcard-container slide-up" style={{
           display: "flex",
           justifyContent: "center", // Center the flashcard horizontally
           alignItems: "center", // Center the flashcard vertically
@@ -181,22 +181,13 @@ const VibeQuestion = () => {
             e.currentTarget.style.transform = "scale(1)";
             e.currentTarget.style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.15)";
           }}>
-            <h3 style={{
-              fontSize: "2rem",
-              position: "absolute", // Fix the position
-              top: "20px", // Position near the top
-              left: "50%", // Center horizontally
-              transform: "translateX(-50%)", // Adjust for centering
-              margin: "0", // Remove default margins
-              textAlign: "center"
-            }}>Your Quote:</h3>
             <div className="quote-box" style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center", // Center the quote text vertically
-              height: "calc(100% - 100px)", // Ensure space for the author and heading
-              gap: "40px", // Add spacing between elements
+              height: "100%", // Use full height of the flashcard
+              gap: "20px", // Add spacing between elements
               padding: "20px" // Add padding for better spacing
             }}>
               <p style={{
@@ -205,16 +196,12 @@ const VibeQuestion = () => {
                 textAlign: "center",
                 margin: "0 20px" // Add horizontal margin for better spacing
               }}>{typedQuote}</p>
+              <p className="quote-author" style={{
+                fontSize: "1rem", // Reduced font size for the author
+                textAlign: "center",
+                marginTop: "20px" // Add spacing above the author
+              }}>— {currentAuthor}</p>
             </div>
-            <p className="quote-author" style={{
-              fontSize: "1rem", // Reduced font size for the author
-              position: "absolute", // Fix the position
-              bottom: "20px", // Position near the bottom
-              left: "50%", // Center horizontally
-              transform: "translateX(-50%)", // Adjust for centering
-              margin: "0", // Remove default margins
-              textAlign: "center"
-            }}>— {currentAuthor}</p>
           </div>
           <button onClick={handleNext} className="flashcard-button" style={{
             position: "absolute",
