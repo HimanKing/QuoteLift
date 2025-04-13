@@ -132,6 +132,55 @@ button:hover {
   color: white;
 }
 
+.quote-box {
+  background: #f7f7f7;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 10px;
+  font-style: italic;
+}
+.quote-box p {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* ------------------vibe 2--------------------------- */
+.vibe-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.vibe-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.vibe-options button {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background-color: #eee;
+  transition: background 0.3s;
+}
+
+.vibe-options button:hover {
+  background-color: #ccc;
+}
+
+.quote-box {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 
 

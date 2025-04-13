@@ -1,0 +1,77 @@
+.vibe-container {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .vibe-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .vibe-options button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background-color: #eee;
+    transition: background 0.3s;
+  }
+  
+  .vibe-options button:hover {
+    background-color: #ccc;
+  }
+  
+  .quote-box {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .flashcard {
+    margin-top: 2rem;
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    will-change: transform, opacity;
+  }
+
+  .flashcard.dragging {
+    cursor: grabbing;
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+
+  .flashcard.hidden {
+    opacity: 0;
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+
+  .flashcard-controls {
+    display: none; /* Hide the buttons */
+  }
+
+  .flashcard-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .flashcard-button:hover {
+    background-color: #45a049;
+  }
