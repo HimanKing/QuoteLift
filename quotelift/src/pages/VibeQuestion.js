@@ -108,7 +108,9 @@ const VibeQuestion = () => {
 
   const handleVibeSelect = (vibe) => {
     setSelectedVibe(vibe);
-    setCurrentIndex(0); // Reset to the first quote when a new vibe is selected
+    const quotesForVibe = QUOTES[vibe];
+    const randomIndex = Math.floor(Math.random() * quotesForVibe.length); // Generate a random index
+    setCurrentIndex(randomIndex); // Set to a random quote
   };
 
   const currentAuthor = selectedVibe
@@ -116,7 +118,17 @@ const VibeQuestion = () => {
     : "";
 
   return (
-    <div className="vibe-container">
+    <div className="vibe-container" style={{
+      overflow: "auto", // Allow scrolling if necessary
+      padding: "20px", // Add padding to ensure space around the flashcard
+      width: "100%", // Ensure the container spans the full width
+      height: "100vh", // Ensure the container spans the full viewport height
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center", // Center the flashcard vertically
+      boxSizing: "border-box" // Include padding in the width and height calculation
+    }}>
       <h2>What kind of vibe do you need today?</h2>
       <div className="vibe-options">
         {VIBE_OPTIONS.map((vibe) => (
@@ -131,14 +143,31 @@ const VibeQuestion = () => {
       </div>
 
       {selectedVibe && (
-        <div className="flashcard-container">
+        <div className="flashcard-container" style={{
+          display: "flex",
+          justifyContent: "center", // Center the flashcard horizontally
+          alignItems: "center", // Center the flashcard vertically
+          width: "100%", // Ensure the container spans the full width
+          maxWidth: "1000px", // Limit the maximum width of the container
+          padding: "20px", // Add padding around the flashcard
+          boxSizing: "border-box", // Include padding in the width calculation
+          position: "relative" // Enable positioning for buttons
+        }}>
+          <button onClick={handleBack} className="flashcard-button" style={{
+            position: "absolute",
+            left: "10px", // Position on the left side
+            bottom: "50%", // Align vertically with the flashcard
+            transform: "translateY(50%)"
+          }}>
+            Back
+          </button>
           <div className="flashcard" style={{
             border: "2px solid #ccc",
-            borderRadius: "10px",
-            padding: "20px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-            maxWidth: "400px",
-            margin: "20px auto",
+            borderRadius: "15px", // Slightly more rounded corners
+            padding: "50px", // Increased padding for more space
+            boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)", // Slightly larger shadow
+            maxWidth: "700px", // Increased width
+            width: "100%", // Ensure the flashcard adjusts to the container
             textAlign: "center",
             backgroundColor: "#fff",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
@@ -146,26 +175,55 @@ const VibeQuestion = () => {
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = "scale(1.05)";
-            e.currentTarget.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.2)";
+            e.currentTarget.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.2)";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+            e.currentTarget.style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.15)";
           }}>
-            <div className="quote-box">
-              <h3>Your Quote:</h3>
-              <p>{typedQuote}</p> {/* Use the typed quote */}
-              <p className="quote-author">— {currentAuthor}</p>
+            <h3 style={{
+              fontSize: "2rem",
+              position: "absolute", // Fix the position
+              top: "20px", // Position near the top
+              left: "50%", // Center horizontally
+              transform: "translateX(-50%)", // Adjust for centering
+              margin: "0", // Remove default margins
+              textAlign: "center"
+            }}>Your Quote:</h3>
+            <div className="quote-box" style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center", // Center the quote text vertically
+              height: "calc(100% - 100px)", // Ensure space for the author and heading
+              gap: "40px", // Add spacing between elements
+              padding: "20px" // Add padding for better spacing
+            }}>
+              <p style={{
+                fontSize: "1.5rem",
+                lineHeight: "2",
+                textAlign: "center",
+                margin: "0 20px" // Add horizontal margin for better spacing
+              }}>{typedQuote}</p>
             </div>
+            <p className="quote-author" style={{
+              fontSize: "1rem", // Reduced font size for the author
+              position: "absolute", // Fix the position
+              bottom: "20px", // Position near the bottom
+              left: "50%", // Center horizontally
+              transform: "translateX(-50%)", // Adjust for centering
+              margin: "0", // Remove default margins
+              textAlign: "center"
+            }}>— {currentAuthor}</p>
           </div>
-          <div className="flashcard-controls">
-            <button onClick={handleBack} className="flashcard-button">
-              Back
-            </button>
-            <button onClick={handleNext} className="flashcard-button">
-              Next
-            </button>
-          </div>
+          <button onClick={handleNext} className="flashcard-button" style={{
+            position: "absolute",
+            right: "10px", // Position on the right side
+            bottom: "50%", // Align vertically with the flashcard
+            transform: "translateY(50%)"
+          }}>
+            Next
+          </button>
         </div>
       )}
     </div>
