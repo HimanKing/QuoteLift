@@ -1,250 +1,210 @@
 .vibe-container {
-    text-align: center;
-    padding: 2rem;
-  }
-  
-  .vibe-options {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2rem 0;
-  }
-  
-  .vibe-options button {
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    background-color: #eee;
-    transition: background 0.3s;
-  }
-  
-  .vibe-options button:hover {
-    background-color: #ccc;
-  }
-  
-  .quote-box {
-    margin-top: 2rem;
-    font-size: 1.25rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    font-style: italic;
-    text-align: center;
-  }
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f); /* Friendly gradient background */
+}
 
-  .quote-author {
-    margin-top: 1rem;
-    font-weight: bold;
-    color: #555;
-  }
+.vibe-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
 
-  .flashcard-container {
-    position: relative;
-    width: 100%;
-    max-width: 800px; /* Increased max width */
-    height: auto;
-    margin: 0 auto;
-    overflow: hidden;
-  }
+.vibe-options button {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background-color: #eee;
+  transition: background 0.3s;
+}
 
-  .flashcard {
-    position: relative;
-    width: 100%;
-    height: auto;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem; /* Increased padding */
-    font-size: 1.5rem; /* Increased font size */
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+.vibe-options button:hover {
+  background-color: #ccc;
+}
 
-  .flashcard.dragging {
-    cursor: grabbing;
-    opacity: 0.8;
-    transform: scale(1.05);
-    transition: none;
-  }
+.quote-box {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+  text-align: center;
+}
 
-  .flashcard.hidden {
+.quote-author {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.flashcard-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Increased max width */
+  height: auto;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.flashcard {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem; /* Increased padding */
+  font-size: 1.5rem; /* Increased font size */
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.flashcard.dragging {
+  cursor: grabbing;
+  opacity: 0.8;
+  transform: scale(1.05);
+  transition: none;
+}
+
+.flashcard.hidden {
+  opacity: 0;
+  transform: none;
+  pointer-events: none;
+}
+
+.flashcard-controls {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.flashcard-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.flashcard-button:hover {
+  background-color: #45a049;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
     opacity: 0;
-    transform: none;
-    pointer-events: none;
   }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-  .flashcard-controls {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-  }
+.slide-up {
+  animation: slideUp 1.2s ease-out; /* Increased duration to 1.2s */
+}
 
-  .flashcard-button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+@keyframes slideRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
-  .flashcard-button:hover {
-    background-color: #45a049;
-  }
+.slide-right {
+  animation: slideRight 0.8s ease-out; /* Animation for the next flashcard */
+}
 
-  @keyframes slideUp {
-    from {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
   }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
 
-  .slide-up {
-    animation: slideUp 1.2s ease-out; /* Increased duration to 1.2s */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
-  @keyframes slideRight {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
+.slide-out-left {
+  animation: slideOutLeft 1.2s ease-out; /* Slower sliding out to the left */
+}
 
-  .slide-right {
-    animation: slideRight 0.8s ease-out; /* Animation for the next flashcard */
-  }
+.slide-in-right {
+  animation: slideInRight 1.2s ease-out; /* Slower sliding in from the right */
+}
 
-  @keyframes slideOutLeft {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
   }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
 
-  @keyframes slideInRight {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
   }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
-  .slide-out-left {
-    animation: slideOutLeft 1.2s ease-out; /* Slower sliding out to the left */
-  }
+.slide-out-right {
+  animation: slideOutRight 1.2s ease-out; /* Slower sliding out to the right */
+}
 
-  .slide-in-right {
-    animation: slideInRight 1.2s ease-out; /* Slower sliding in from the right */
-  }
+.slide-in-left {
+  animation: slideInLeft 1.2s ease-out; /* Slower sliding in from the left */
+}
 
-  @keyframes slideOutRight {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(100%);
-      opacity: 0;
-    }
+@keyframes slideUpFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
   }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-  @keyframes slideInLeft {
-    from {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  .slide-out-right {
-    animation: slideOutRight 1.2s ease-out; /* Slower sliding out to the right */
-  }
-
-  .slide-in-left {
-    animation: slideInLeft 1.2s ease-out; /* Slower sliding in from the left */
-  }
-
-  @keyframes slideUpFromBottom {
-    from {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  .slide-up-from-bottom {
-    animation: slideUpFromBottom 1.2s ease-out; /* Smooth slide-up animation */
-  }
-
-  .quote-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  .quote-form label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-
-  .quote-form input {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-
-  .submit-button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .submit-button:hover {
-    background-color: #45a049;
-  }
-
-  .error {
-    color: red;
-    font-weight: bold;
-    margin-top: 1rem;
-  }
+.slide-up-from-bottom {
+  animation: slideUpFromBottom 1.2s ease-out; /* Smooth slide-up animation */
+}

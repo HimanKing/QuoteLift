@@ -1,0 +1,38 @@
+.quote-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff9a8b, #ff6a88, #ff99ac); /* Gradient background */
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.quote-box {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  max-width: 600px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.quote-text {
+  font-family: 'Georgia', serif;
+  font-size: 1.5rem;
+  line-height: 2;
+  color: #333;
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
